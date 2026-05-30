@@ -4,14 +4,6 @@ from scipy.optimize import least_squares, minimize
 
 
 def your_algorithm(d_hat_u, p_bs):
-    """한 사용자의 18개 기지국 RTT 거리(d_hat_u)와 기지국 좌표(p_bs)로 2D 위치를 추정한다.
-
-    One-Sided Disk-Voting Localization
-      1단계: 단방향 NLOS 편향 → 모든 측정 원판이 진짜 위치를 포함한다는 성질을 이용해,
-             공간 격자에서 LOS 경계와 가장 많이 일치하는 칸을 전역 투표로 찾는다(초기위치).
-      2단계: 지수분포 단방향 최대우도로 정밀화. 척도 σ는 사용자별 잔차 산포로 자동 결정.
-      3단계: LOS 인라이어만으로 최소제곱 재추정.
-    """
     bs = np.asarray(p_bs, dtype=float).T          # (18, 2)
     r = np.asarray(d_hat_u, dtype=float).ravel()  # (18,)
     tau, kappa = 2.0, 5.0
